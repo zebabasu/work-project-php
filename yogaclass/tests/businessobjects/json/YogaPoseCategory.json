@@ -1,0 +1,22 @@
+{
+    "0": {
+        "id": 1,
+        "poseCategoryName": "standing"
+    },
+    "1": {
+        "id": 2,
+        "poseCategoryName": "sitting"
+    },
+    "2": {
+        "id": 3,
+        "poseCategoryName": "standing-backbend"
+    },
+    "3": {
+        "id": 4,
+        "poseCategoryName": "sitting-backbend"
+    },
+    "4": {
+        "id": 5,
+        "poseCategoryName": "backbend"
+    }
+}

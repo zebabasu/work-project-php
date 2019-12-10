@@ -1,0 +1,29 @@
+{
+    "0": {
+        "id": null,
+        "imagePath": "c:\/yoga-image-path\/camelpose.jpg",
+        "poseName": "Camel Pose",
+        "poseDescription": "uses core strength",
+        "categories": [
+            3
+        ]
+    },
+    "1": {
+        "id": null,
+        "imagePath": "c:\/yoga-image-path\/pigeon.jpg",
+        "poseName": "Pigeon Pose",
+        "poseDescription": "hip stretch",
+        "categories": [
+            2
+        ]
+    },
+    "2": {
+        "id": null,
+        "imagePath": "c:\/yoga-image-path\/staff.jpg",
+        "poseName": "Staff Pose",
+        "poseDescription": "strenghthens back",
+        "categories": [
+            2
+        ]
+    }
+}
