@@ -8,58 +8,27 @@ require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'
 
 use yogaclass\src\dataaccess\YogaPoseCategoryDbGateway;
 use yogaclass\src\businessobjects\YogaPoseCategory;
-class YogaPoseCategoryDbGatewayTest extends TestCase {
+use \yogaclass\src\dataaccess\DataManager;
+class YogaPoseCategoryDbGatewayTest {
 
-    public function testAddYogaPoseCategory1(){
-        //$this->expectException(\PDOException::class);
-        $dbGateway = new YogaPoseCategoryDbGateway();
+    public static function testAddYogaPoseCategory() {
+
+        $dbGateway = new YogaPoseCategoryDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
+
         $ypc = new YogaPoseCategory('standing', time());
-        $lastId = $dbGateway->addYogaPoseCategory($ypc);
+        $dbGateway->addYogaPoseCategory($ypc);
 
         $ypc2 = new YogaPoseCategory('sitting', time());
-        $lastId = $dbGateway->addYogaPoseCategory($ypc2);
+        $dbGateway->addYogaPoseCategory($ypc2);
 
         $ypc3 = new YogaPoseCategory('standing-backbend', time());
-        $lastId = $dbGateway->addYogaPoseCategory($ypc3);
+        $dbGateway->addYogaPoseCategory($ypc3);
 
         $ypc4 = new YogaPoseCategory('sitting-backbend ', time());
-        $lastId = $dbGateway->addYogaPoseCategory($ypc4);
+        $dbGateway->addYogaPoseCategory($ypc4);
 
         $ypc5 = new YogaPoseCategory('inversion', time());
-        $lastId = $dbGateway->addYogaPoseCategory($ypc5);
-
-        $this->assertGreaterThan(-1, $lastId);
-    }
-    public function testAddYogaPoseCategory2(){
-        //$this->expectException(\PDOException::class);
-        $dbGateway = new YogaPoseCategoryDbGateway();
-
-        $ypc2 = new YogaPoseCategory('sitting', time());
-        $lastId = $dbGateway->addYogaPoseCategory($ypc2);
-
-        $this->assertGreaterThan(-1, $lastId);
-    }
-    public function testAddYogaPoseCategory3(){
-        //$this->expectException(\PDOException::class);
-        $dbGateway = new YogaPoseCategoryDbGateway();
-        $ypc3 = new YogaPoseCategory('standing-backbend', time());
-        $lastId = $dbGateway->addYogaPoseCategory($ypc3);
-
-        $this->assertGreaterThan(-1, $lastId);
-    }
-    public function testAddYogaPoseCategory4(){
-        //$this->expectException(\PDOException::class);
-        $dbGateway = new YogaPoseCategoryDbGateway();
-        $ypc4 = new YogaPoseCategory('sitting-backbend ', time());
-        $lastId = $dbGateway->addYogaPoseCategory($ypc4);
-        $this->assertGreaterThan(-1, $lastId);
-    }
-    public function testAddYogaPoseCategory5(){
-        //$this->expectException(\PDOException::class);
-        $dbGateway = new YogaPoseCategoryDbGateway();
-        $ypc5 = new YogaPoseCategory('inversion', time());
-        $lastId = $dbGateway->addYogaPoseCategory($ypc5);
-
-        $this->assertGreaterThan(-1, $lastId);
+        $dbGateway->addYogaPoseCategory($ypc5);
     }
 }
+YogaPoseCategoryDbGatewayTest::testAddYogaPoseCategory();

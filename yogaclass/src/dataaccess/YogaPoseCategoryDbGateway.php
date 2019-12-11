@@ -10,11 +10,12 @@ class YogaPoseCategoryDbGateway {
 
     private $dbConnection;
 
-    function __construct() {
-        $this->dbConnection = DataManager::connect(DataManager::PERSISTENCE_UNIT_NAME);
+    function __construct($persistenceUnitName) {
+        $this->dbConnection = DataManager::connect($persistenceUnitName);
     }
 
     public function addYogaPoseCategory(YogaPoseCategory $yogaPoseCategory){
+        $this->dbConnection->beginTransaction();
         try{
             $poseCategoryName = $yogaPoseCategory->getPoseCategoryName();
 
@@ -22,6 +23,7 @@ class YogaPoseCategoryDbGateway {
                         (POSECATEGORYNAME, LASTUPDATED)
                       VALUES ('$poseCategoryName', NOW())";
             $this->dbConnection->query($query);
+            $this->dbConnection->commit();
             return $this->dbConnection->lastInsertId();
         } catch(Exception $exception){
             echo 'Exception -> ';
