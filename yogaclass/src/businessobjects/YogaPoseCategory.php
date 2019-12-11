@@ -3,12 +3,20 @@ namespace yogaclass\src\businessobjects;
 use JsonSerializable;
 class YogaPoseCategory implements JsonSerializable{
 
-    private $id;
     private $poseCategoryName;
 
-    function __construct($id, $poseCategoryName){
-        $this->id = $id;
+    /**
+     * @return mixed
+     */
+    public function getPoseCategoryName() {
+        return $this->poseCategoryName;
+    }
+    private $lastUpdated;
+
+    function __construct($poseCategoryName, $lastUpdated){
         $this->poseCategoryName = $poseCategoryName;
+        $this->lastUpdated = $lastUpdated;
+
     }
     public static function createArrayFromJson($jsonArray){
         $listYogaPoseCategory = json_decode($jsonArray, true);
@@ -17,8 +25,8 @@ class YogaPoseCategory implements JsonSerializable{
    }
    public function jsonSerialize() {
         return [
-            'id' => $this->id,
-            'poseCategoryName' => $this->poseCategoryName
+            'poseCategoryName' => $this->poseCategoryName,
+            'lastUpdated' => $this->lastUpdated
         ];
     }
 }

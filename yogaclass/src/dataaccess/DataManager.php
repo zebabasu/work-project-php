@@ -3,31 +3,28 @@
 
 namespace yogaclass\src\dataaccess;
 use PDO;
+use yogaclass\src\commons\ConfigIniAccess;
+require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'commons'.DIRECTORY_SEPARATOR.'ConfigIniAccess.php';
 class DataManager {
-    private const PERSISTENCE_UNIT_NAME = 'YogaPersistenceUnit';
-    private $iniPath;
-    function __construct() {
-        $this->iniPath = realpath(__DIR__.'/../../config/config.ini');
+    public const PERSISTENCE_UNIT_NAME = 'YogaPersistenceUnit';
 
-    }
-
-    public function connect() : PDO
+    public static function connect($persistenceUnitName) : PDO
     {
+        $iniConnectionData = ConfigIniAccess::getConfigSection($persistenceUnitName);
         try {
+            $url = $iniConnectionData['url'];
 
-            $iniFile = parse_ini_file($this->iniPath, true);
-            $url = $iniFile['YogaPersistenceUnit']['url'];
-            $username = $iniFile['YogaPersistenceUnit']['username'];
-            $password = $iniFile['YogaPersistenceUnit']['password'];
-            //$connStr = "mysql:host={$dbInfo['host']};{$dbInfo['dbname']}";
+            $username = $iniConnectionData['username'];
+            $password = $iniConnectionData['password'];
+
             $conn = new PDO($url, $username, $password);
 
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;
         } catch (PDOException $exception) {
-            echo "error";
-            exit($exception->getMessage());
-        }
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
     }
 }

@@ -5,7 +5,7 @@ namespace yogaclass\tests\businessobjects;
 use yogaclass\src\businessobjects\YogaPose;
 use PHPUnit\Framework\TestCase;
 use ArrayObject;
-require dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaPose.php';
+require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaPose.php';
 
 class YogaPoseTest extends TestCase{
 

@@ -4,7 +4,7 @@ namespace yogaclass\tests\businessobjects;
 
 use PHPUnit\Framework\TestCase;
 use ArrayObject;
-require dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaPoseCategory.php';
+require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaPoseCategory.php';
 use yogaclass\src\businessobjects\YogaPoseCategory;
 
 class YogaPoseCategoryTest extends TestCase {
@@ -25,7 +25,6 @@ class YogaPoseCategoryTest extends TestCase {
             echo $category[poseCategoryName] . "\n";
         }*/
         $this->assertSame(5, count($listYogaPoseCategory));
-        $this->assertSame(1,$listYogaPoseCategory[0]['id'] );
         $this->assertSame('standing',$listYogaPoseCategory[0]['poseCategoryName'] );
     }
     /**
@@ -34,11 +33,11 @@ class YogaPoseCategoryTest extends TestCase {
     public static function createYogaPoseCategoryArray(): ArrayObject {
         $listYogaPoseCategory = new ArrayObject();
 
-        $listYogaPoseCategory->append(new YogaPoseCategory(1, 'standing'));
-        $listYogaPoseCategory->append(new YogaPoseCategory(2, 'sitting'));
-        $listYogaPoseCategory->append(new YogaPoseCategory(3, 'standing-backbend'));
-        $listYogaPoseCategory->append(new YogaPoseCategory(4, 'sitting-backbend'));
-        $listYogaPoseCategory->append(new YogaPoseCategory(5, 'backbend'));
+        $listYogaPoseCategory->append(new YogaPoseCategory('standing', time()));
+        $listYogaPoseCategory->append(new YogaPoseCategory('sitting', time()));
+        $listYogaPoseCategory->append(new YogaPoseCategory('standing-backbend', time()));
+        $listYogaPoseCategory->append(new YogaPoseCategory('sitting-backbend', time()));
+        $listYogaPoseCategory->append(new YogaPoseCategory( 'backbend', time()));
         return $listYogaPoseCategory;
     }
 

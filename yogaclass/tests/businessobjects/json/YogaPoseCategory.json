@@ -1,22 +1,22 @@
 {
     "0": {
-        "id": 1,
-        "poseCategoryName": "standing"
+        "poseCategoryName": "standing",
+        "lastUpdated": 1576018910
     },
     "1": {
-        "id": 2,
-        "poseCategoryName": "sitting"
+        "poseCategoryName": "sitting",
+        "lastUpdated": 1576018910
     },
     "2": {
-        "id": 3,
-        "poseCategoryName": "standing-backbend"
+        "poseCategoryName": "standing-backbend",
+        "lastUpdated": 1576018910
     },
     "3": {
-        "id": 4,
-        "poseCategoryName": "sitting-backbend"
+        "poseCategoryName": "sitting-backbend",
+        "lastUpdated": 1576018910
     },
     "4": {
-        "id": 5,
-        "poseCategoryName": "backbend"
+        "poseCategoryName": "backbend",
+        "lastUpdated": 1576018910
     }
 }
