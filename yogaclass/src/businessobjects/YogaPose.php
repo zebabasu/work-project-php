@@ -3,7 +3,6 @@ namespace yogaclass\src\businessobjects;
 use JsonSerializable;
 class YogaPose implements JsonSerializable
 {
-    private $id;
     private $imagePath;
     private $poseName;
     private $poseDescription;

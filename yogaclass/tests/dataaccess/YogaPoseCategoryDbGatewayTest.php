@@ -9,6 +9,12 @@ require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'
 use yogaclass\src\dataaccess\YogaPoseCategoryDbGateway;
 use yogaclass\src\businessobjects\YogaPoseCategory;
 use \yogaclass\src\dataaccess\DataManager;
+
+/**
+ * Class YogaPoseCategoryDbGatewayTest
+ * @package yogaclass\tests\dataaccess
+ * these aren't true unit tests as they need a database connection in yogaclass/config/config.ini
+ */
 class YogaPoseCategoryDbGatewayTest {
 
     public static function testAddYogaPoseCategory() {

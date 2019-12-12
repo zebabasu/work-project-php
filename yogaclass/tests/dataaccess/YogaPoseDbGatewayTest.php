@@ -11,7 +11,8 @@ require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'
 
 /**
  * Class YogaPoseDbGatewayTest
- * these aren't true unit tests, as they require a database connection
+ * these aren't true unit tests, as they require a database connection in yogaclass/config/config.ini
+ * //TODO need a simulation of setup and teardown here
  */
 class YogaPoseDbGatewayTest {
 
