@@ -1,10 +1,10 @@
 <?php
 
-namespace yogaclass\tests\dataaccess;
+namespace yogaclass\tests\dataaccess\functional;
 
 use PHPUnit\Framework\TestCase;
-require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaPoseCategory.php';
-require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'dataaccess'.DIRECTORY_SEPARATOR.'YogaPoseCategoryDbGateway.php';
+require_once dirname(__DIR__, 3).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaPoseCategory.php';
+require_once dirname(__DIR__, 3).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'dataaccess'.DIRECTORY_SEPARATOR.'YogaPoseCategoryDbGateway.php';
 
 use yogaclass\src\dataaccess\YogaPoseCategoryDbGateway;
 use yogaclass\src\businessobjects\YogaPoseCategory;

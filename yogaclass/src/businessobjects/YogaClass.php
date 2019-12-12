@@ -16,8 +16,9 @@ class YogaClass implements \JsonSerializable {
      * @param $yogaTeacherName
      * @param $yogaTeacherEmailId
      * @param $publicShared
+     *
      */
-    public function __construct($className, $yogaTeacherName, $yogaTeacherEmailId, $publicShared) {
+    public function __construct($className, $publicShared, $yogaTeacherName='Default Yoga Teacher', $yogaTeacherEmailId='teacher@email.com') {
         $this->className = $className;
         $this->yogaTeacherName = $yogaTeacherName;
         $this->yogaTeacherEmailId = $yogaTeacherEmailId;

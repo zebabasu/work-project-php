@@ -25,8 +25,8 @@ class YogaClassTest extends TestCase {
     public static function createYogaClassArray(): ArrayObject {
         $listYogaClass = new ArrayObject();
 
-        $listYogaClass->append(new YogaClass("Slow Flow", "Default Yoga Teacher", "teacher@email.com", 1));
-        $listYogaClass->append(new YogaClass("Ashtanga Primary", "Default Yoga Teacher", "teacher@email.com", 0));
+        $listYogaClass->append(new YogaClass("Slow Flow", 1));
+        $listYogaClass->append(new YogaClass("Ashtanga Primary", 0));
         return $listYogaClass;
     }
 
