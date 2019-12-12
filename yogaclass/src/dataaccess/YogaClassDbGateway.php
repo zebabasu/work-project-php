@@ -10,7 +10,7 @@ class YogaClassDbGateway {
 
     private $dbConnection;
 
-    function __construct($persistenceUnitName) {
+    function __construct($persistenceUnitName='YogaPersistenceUnit') {
         $this->dbConnection = DataManager::connect($persistenceUnitName);
     }
     public function addYogaClass(YogaClass $yogaClass){
@@ -34,11 +34,11 @@ class YogaClassDbGateway {
 
 
     }
-    public function removeYogaPoseCategory($id){
-        //if $id is associated with one or more poses, cannot be removed
+    public function removeYogaClass($id){
+
 
     }
-    public function getAllYogaPoseCategory(){
+    public function getAllYogaClasses(){
 
     }
 }

@@ -1,9 +1,10 @@
 <?php
-
-
+namespace yogaclass\tests\dataaccess\functional;
 use yogaclass\src\dataaccess\DataManager;
 use PHPUnit\Framework\TestCase;
-require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'dataaccess'.DIRECTORY_SEPARATOR.'DataManager.php';
+use PDO;
+use PDOException;
+require_once dirname(__DIR__, 3).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'dataaccess'.DIRECTORY_SEPARATOR.'DataManager.php';
 class DataManagerTest extends TestCase {
 
     public function testConnect(){
@@ -12,11 +13,8 @@ class DataManagerTest extends TestCase {
     }
 
     public function testConnectFail(){
-        try {
-            $pdo = DataManager::connect("zz");
-        } catch(PDOException $exception){
-           $this->assertEquals($exception->getCode(), 0);
-        }
+        $this->expectException(PDOException::class);
+        DataManager::connect("zz");
     }
 
 }

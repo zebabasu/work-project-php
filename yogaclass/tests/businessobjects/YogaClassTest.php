@@ -2,10 +2,13 @@
 
 namespace yogaclass\tests\businessobjects;
 
-use yogaclass\src\businessobjects\YogaClass;
+
 require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaClass.php';
+require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaTeacher.php';
 use ArrayObject;
 use PHPUnit\Framework\TestCase;
+use yogaclass\src\businessobjects\YogaTeacher;
+use yogaclass\src\businessobjects\YogaClass;
 
 class YogaClassTest extends TestCase {
 
@@ -24,9 +27,9 @@ class YogaClassTest extends TestCase {
 
     public static function createYogaClassArray(): ArrayObject {
         $listYogaClass = new ArrayObject();
-
-        $listYogaClass->append(new YogaClass("Slow Flow", 1));
-        $listYogaClass->append(new YogaClass("Ashtanga Primary", 0));
+        $yogaTeacher = new YogaTeacher();
+        $listYogaClass->append(new YogaClass("Slow Flow", 1, $yogaTeacher));
+        $listYogaClass->append(new YogaClass("Ashtanga Primary", 0, $yogaTeacher));
         return $listYogaClass;
     }
 

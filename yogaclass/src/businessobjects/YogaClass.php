@@ -5,6 +5,7 @@ namespace yogaclass\src\businessobjects;
 
 
 class YogaClass implements \JsonSerializable {
+    private $id;
     private $className;
     private $yogaTeacherName;
     private $yogaTeacherEmailId;
@@ -18,10 +19,10 @@ class YogaClass implements \JsonSerializable {
      * @param $publicShared
      *
      */
-    public function __construct($className, $publicShared, $yogaTeacherName='Default Yoga Teacher', $yogaTeacherEmailId='teacher@email.com') {
+    public function __construct($className, $publicShared, YogaTeacher $yogaTeacher) {
         $this->className = $className;
-        $this->yogaTeacherName = $yogaTeacherName;
-        $this->yogaTeacherEmailId = $yogaTeacherEmailId;
+        $this->yogaTeacherName = $yogaTeacher->getTeacherName();
+        $this->yogaTeacherEmailId = $yogaTeacher->getEmailId();
         $this->publicShared = $publicShared;
     }
 
