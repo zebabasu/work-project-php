@@ -49,7 +49,6 @@ class YogaPose implements JsonSerializable
     }
     public function jsonSerialize() {
         return [
-            'id' => $this->id,
             'imagePath' => $this->imagePath,
             'poseName' => $this->poseName,
             'poseDescription' => $this->poseDescription,

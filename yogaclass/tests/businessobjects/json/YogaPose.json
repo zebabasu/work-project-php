@@ -1,6 +1,5 @@
 {
     "0": {
-        "id": null,
         "imagePath": "c:\/yoga-image-path\/camelpose.jpg",
         "poseName": "Camel Pose",
         "poseDescription": "uses core strength",
@@ -9,7 +8,6 @@
         ]
     },
     "1": {
-        "id": null,
         "imagePath": "c:\/yoga-image-path\/pigeon.jpg",
         "poseName": "Pigeon Pose",
         "poseDescription": "hip stretch",
@@ -18,7 +16,6 @@
         ]
     },
     "2": {
-        "id": null,
         "imagePath": "c:\/yoga-image-path\/staff.jpg",
         "poseName": "Staff Pose",
         "poseDescription": "strenghthens back",

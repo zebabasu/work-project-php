@@ -48,7 +48,7 @@ class YogaPoseDbGateway{
     private function associatePoseAndCategories($lastInsertId, $categories){
         try {
             foreach ($categories as $category) {
-                $query = "INSERT INTO YOGA_POSE_CATEGORIES
+                $query = "INSERT IGNORE INTO YOGA_POSE_CATEGORIES
                             (YOGA_POSE_ID, POSE_CATEGORY_NAME)
                           VALUES ('$lastInsertId', '$category')";
                 $this->dbConnection->query($query);
