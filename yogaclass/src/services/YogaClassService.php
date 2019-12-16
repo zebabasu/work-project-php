@@ -8,20 +8,18 @@ use yogaclass\src\businessobjects\YogaClass;
 use yogaclass\src\dataaccess\YogaClassDbGateway;
 
 class YogaClassService {
-    private $dbGateway;
+    private static $dbGateway;
 
-    /**
-     * YogaClassService constructor.
-     */
-    public function __construct() {
-        $this->dbGateway = new YogaClassDbGateway();
-    }
-
-    public function createYogaClass($className, $publicShared, YogaTeacher $yogateacher){
+    public static function createYogaClass($className, $publicShared, YogaTeacher $yogateacher){
+        YogaClassService::$dbGateway = new YogaClassDbGateway();
         $yogaClass = YogaClass($className, $publicShared, $yogateacher);
-        $this->dbGateway->addYogaClass($yogaClass);
+        YogaClassService::$dbGateway->addYogaClass($yogaClass);
     }
-    public function getAllYogaClasses(){
+    public static function getAllYogaClasses(){
+        //SELECT CLASSNAME, YOGATEACHER_NAME, YOGATEACHER_EMAIL_ID, PUBLICSHARED FROM YOGA_CLASS
+        YogaClassService::$dbGateway = new YogaClassDbGateway();
 
     }
+
+
 }

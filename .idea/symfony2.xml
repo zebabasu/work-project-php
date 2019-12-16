@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Symfony2PluginSettings">
+    <option name="routingFiles">
+      <list>
+        <routing_file path="yogaclass/src/services/YogaClassService.php" />
+        <routing_file path="yogaclass/src/services/YogaPoseService.php" />
+        <routing_file path="yogaclass/src/services/YogaPoseCategoryService.php" />
+      </list>
+    </option>
+  </component>
+</project>

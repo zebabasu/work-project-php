@@ -8,13 +8,12 @@ use yogaclass\src\businessobjects\YogaClass;
 
 class YogaClassDbGateway {
 
-    private $dbConnection;
+    private $dataManager;
 
-    function __construct($persistenceUnitName='YogaPersistenceUnit') {
-        $this->dbConnection = DataManager::connect($persistenceUnitName);
+    public function __construct($persistenceUnitName='YogaPersistenceUnit') {
+        $this->dataManager = new DataManager($persistenceUnitName);
     }
     public function addYogaClass(YogaClass $yogaClass){
-        $this->dbConnection->beginTransaction();
         try{
             $className = $yogaClass->getClassName();
             $publicShared = $yogaClass->getPublicShared();
@@ -24,9 +23,8 @@ class YogaClassDbGateway {
             $query = "INSERT INTO YOGA_CLASS 
                         (CLASSNAME, PUBLICSHARED, YOGATEACHER_NAME, YOGATEACHER_EMAIL_ID, LASTUPDATED)
                       VALUES ('$className', '$publicShared', '$teacherName', '$teacherEmailId', NOW())";
-            $this->dbConnection->query($query);
-            $this->dbConnection->commit();
-            return $this->dbConnection->lastInsertId();
+
+            return $this->dataManager->execute($query);
         } catch(Exception $exception){
             echo 'Exception -> ';
             var_dump($exception->getMessage());
@@ -39,6 +37,17 @@ class YogaClassDbGateway {
 
     }
     public function getAllYogaClasses(){
+        //SELECT CLASSNAME, YOGATEACHER_NAME, YOGATEACHER_EMAIL_ID, PUBLICSHARED FROM YOGA_CLASS
+        try{
 
+            $query = "SELECT CLASSNAME, YOGATEACHER_NAME, YOGATEACHER_EMAIL_ID, PUBLICSHARED FROM YOGA_CLASS";
+            return $this->dataManager->fetchAll($query);
+
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
     }
+
+
 }
