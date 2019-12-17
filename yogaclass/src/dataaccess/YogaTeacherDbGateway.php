@@ -34,4 +34,26 @@ class YogaTeacherDbGateway {
             var_dump($exception->getMessage());
         } throw $exception;
     }
+    public function getYogaTeacher($name, $emailId){
+        try{
+            $query = "SELECT TEACHERNAME, EMAILID FROM YOGA_TEACHER
+                        WHERE TEACHERNAME = '$name' AND EMAILID = '$emailId' ";
+            return $this->dataManager->fetchAll($query);
+
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
+    }
+    public function getYogaTeacherByName($name){
+        try{
+            $query = "SELECT TEACHERNAME, EMAILID FROM YOGA_TEACHER
+                        WHERE TEACHERNAME = '$name' ";
+            return $this->dataManager->fetchAll($query);
+
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
+    }
 }

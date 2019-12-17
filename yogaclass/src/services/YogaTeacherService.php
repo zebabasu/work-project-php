@@ -16,4 +16,13 @@ class YogaTeacherService {
         $listYogaTeacher = $this->dbGateway->getAllYogaTeachers();
         return $listYogaTeacher;
     }
+    public function getYogaTeacher($name, $emailId){
+        $yogaTeacher = $this->dbGateway->getYogaTeacher($name, $emailId);
+        return $yogaTeacher;
+    }
+
+    public function getYogaTeacherByName($name){
+        $yogaTeacher = $this->dbGateway->getYogaTeacherByName($name);
+        return $yogaTeacher;
+    }
 }

@@ -13,10 +13,21 @@ class AddDefaultDataToTables extends TestCase {
 
     public function testAddYogaTeacher(){
         /*********************************/
-        $this->markTestSkipped('skip test testAddYogaTeacher');
+        $this->markTestSkipped('skip test testAddYogaTeacher1');
         /*********************************/
 
         $yogaTeacher = new YogaTeacher();
+        $dbGateway = new YogaTeacherDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
+        $lastInsertId = $dbGateway->addYogaTeacher($yogaTeacher);
+        $this->assertNotNull($lastInsertId);
+    }
+
+    public function testAddYogaTeacher2(){
+        /*********************************/
+        $this->markTestSkipped('skip test testAddYogaTeacher2');
+        /*********************************/
+
+        $yogaTeacher = new YogaTeacher("Zeba", "zeba@email.com");
         $dbGateway = new YogaTeacherDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
         $lastInsertId = $dbGateway->addYogaTeacher($yogaTeacher);
         $this->assertNotNull($lastInsertId);

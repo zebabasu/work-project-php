@@ -29,12 +29,26 @@ $app->group('/hello/{name}', function () {
         return $response;
     });
 });
+
 $app->group('/yogateachers', function () {
-    $this->map(['GET'], '', function (Request $request, Response $response) {
+    /*$this->map(['GET'], '', function (Request $request, Response $response) {
         $yogaTeacherService = new YogaTeacherService();
         $jsonYTL = $yogaTeacherService->getAllYogaTeachers();
         return $response->withJson($jsonYTL);
         //return $response->getBody()->write(var_export($jsonYCL, true));
+    });*/
+    $this->get('', function (Request $request, Response $response, array $args) {
+        $filter2 = $request->getQueryParam('name');
+        var_dump($filter2);
+        $yogaTeacherService = new YogaTeacherService();
+        $jsonYTL = $yogaTeacherService->getAllYogaTeachers();
+        return $response->withJson($jsonYTL);
+    });
+    $this->get('/{name}', function (Request $request, Response $response, array $args) {
+        $name = $args['name'];
+        $yogaTeacherService = new YogaTeacherService();
+        $jsonYT = $yogaTeacherService->getYogaTeacherByName($name);
+        return $response->withJson($jsonYT);
     });
 });
 $app->group('/yogaclasses', function () {
