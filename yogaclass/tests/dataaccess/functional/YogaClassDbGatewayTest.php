@@ -7,7 +7,11 @@ use yogaclass\src\businessobjects\YogaTeacher;
 use yogaclass\src\dataaccess\YogaClassDbGateway;
 use yogaclass\src\dataaccess\DataManager;
 use PHPUnit\Framework\TestCase;
-
+/**
+ * Class YogaClassDbGatewayTest
+ * @package yogaclass\tests\dataaccess\functional
+ * these aren't true unit tests as they need a database connection in yogaclass/config/config.ini
+ */
 class YogaClassDbGatewayTest extends TestCase{
 
     private $lastInsertId;
@@ -17,13 +21,11 @@ class YogaClassDbGatewayTest extends TestCase{
         $yogaClass = new YogaClass("Slow Vinyasa Flow", 1, $yogaTeacher);
         $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
         $this->lastInsertId= $dbGateway->addYogaClass($yogaClass);
-        echo $this->lastInsertId;
         $this->assertNotNull($this->lastInsertId);
     }
 
     protected function tearDown(): void
     {
-        echo "\n". $this->lastInsertId;
         $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
         $countRowsDeleted = $dbGateway->removeYogaClass($this->lastInsertId);
         $this->assertEquals(1, $countRowsDeleted);

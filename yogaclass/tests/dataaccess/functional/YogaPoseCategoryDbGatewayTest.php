@@ -12,26 +12,20 @@ use \yogaclass\src\dataaccess\DataManager;
  * @package yogaclass\tests\dataaccess
  * these aren't true unit tests as they need a database connection in yogaclass/config/config.ini
  */
-class YogaPoseCategoryDbGatewayTest {
+class YogaPoseCategoryDbGatewayTest extends TestCase{
 
-    public static function testAddYogaPoseCategory() {
+    public function testAddYogaPoseCategory() {
 
         $dbGateway = new YogaPoseCategoryDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
-
-        $ypc = new YogaPoseCategory('standing', time());
-        $dbGateway->addYogaPoseCategory($ypc);
-
-        $ypc2 = new YogaPoseCategory('sitting', time());
-        $dbGateway->addYogaPoseCategory($ypc2);
-
-        $ypc3 = new YogaPoseCategory('standing-backbend', time());
-        $dbGateway->addYogaPoseCategory($ypc3);
-
-        $ypc4 = new YogaPoseCategory('sitting-backbend ', time());
-        $dbGateway->addYogaPoseCategory($ypc4);
-
-        $ypc5 = new YogaPoseCategory('inversion', time());
-        $dbGateway->addYogaPoseCategory($ypc5);
+        $ypc = new YogaPoseCategory('deleteMe', time());
+        $lastInsertId = $dbGateway->addYogaPoseCategory($ypc);
+        $this->assertNotNull($lastInsertId);
+    }
+    protected function tearDown(): void
+    {
+        $dbGateway = new YogaPoseCategoryDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
+        $countRowsDeleted = $dbGateway->removeYogaPoseCategory('deleteMe');
+        $this->assertEquals(1, $countRowsDeleted);
     }
 }
-YogaPoseCategoryDbGatewayTest::testAddYogaPoseCategory();
+

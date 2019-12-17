@@ -33,9 +33,14 @@ class YogaClassDbGateway {
 
     }
     public function removeYogaClass($id){
-        $query = "DELETE FROM YOGA_CLASS
-             WHERE ID = '$id'";
-        return $this->dataManager->deleteWithCommit($query);
+        try {
+            $query = "DELETE FROM YOGA_CLASS
+                 WHERE ID = '$id'";
+            return $this->dataManager->deleteWithCommit($query);
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
 
     }
     public function getAllYogaClasses(){
@@ -48,6 +53,4 @@ class YogaClassDbGateway {
             var_dump($exception->getMessage());
         } throw $exception;
     }
-
-
 }

@@ -58,6 +58,10 @@ class YogaClass implements \JsonSerializable {
         return  $listYogaClass;
 
     }
+    public static function createJson($listYogaClass){
+        $jsonString =  json_encode($listYogaClass, JSON_PRETTY_PRINT);
+        return $jsonString;
+    }
     public function jsonSerialize() {
         return [
             'className' => $this->className,

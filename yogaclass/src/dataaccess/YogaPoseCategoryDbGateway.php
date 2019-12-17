@@ -30,8 +30,25 @@ class YogaPoseCategoryDbGateway {
     }
     public function removeYogaPoseCategory($id){
         //if $id is associated with one or more poses, cannot be removed
-
+        try {
+            $query = "DELETE FROM YOGA_POSE_CATEGORY
+                 WHERE POSECATEGORYNAME = '$id'";
+            return $this->dataManager->deleteWithCommit($query);
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
     }
+    /*
+     * try {
+            $query = "DELETE FROM YOGA_CLASS
+                 WHERE ID = '$id'";
+            return $this->dataManager->deleteWithCommit($query);
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
+     */
     public function getAllYogaPoseCategory(){
 
     }

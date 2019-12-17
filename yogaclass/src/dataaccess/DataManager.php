@@ -55,6 +55,12 @@ class DataManager {
         $statement->execute();
         return $this->connectionInfo->lastInsertId();
     }
+    public function deleteNoCommit($query){
+        $statement = $this->connectionInfo->prepare($query);
+        $statement->execute();
+        $rowCount =  $statement->rowCount();
+        return $rowCount;
+    }
     public function commit(){
         $this->connectionInfo->commit();
     }

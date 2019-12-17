@@ -5,6 +5,11 @@ use PHPUnit\Framework\TestCase;
 use PDO;
 use PDOException;
 
+/**
+ * Class DataManagerTest
+ * @package yogaclass\tests\dataaccess\functional
+ * these aren't true unit tests as they need a database connection in yogaclass/config/config.ini
+ */
 class DataManagerTest extends TestCase {
 
     public function testConnect(){

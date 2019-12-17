@@ -26,25 +26,44 @@ class YogaPoseDbGateway{
             $this->dataManager->insertNoCommit($query);
             $lastInsertId = $this->dataManager->lastInsertId();
             try {
-                $lastInsertId = $this->associatePoseAndCategories($lastInsertId, $categories);
-
+                $this->associatePoseAndCategories($lastInsertId, $categories);
+                $this->dataManager->commit();
+                return $lastInsertId;
             }catch (\PDOException $exception){
                 echo 'Exception -> ';
                 var_dump($exception->getMessage());
                 $this->dataManager->rollBack();
                 $this->dataManager->commit();
-                exit($exception->getMessage());
-            }
-            $this->dataManager->commit();
-            return $lastInsertId;
+            } throw $exception;
+        } catch(PDOException $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+       } throw $exception;
+    }
+    public function removeYogaPose($yogaPoseId){
+        try {
+            $this->dataManager->beginTransaction();
+            $query1 = "DELETE FROM YOGA_POSE_CATEGORIES
+                 WHERE YOGA_POSE_ID = '$yogaPoseId'";
+            $this->dataManager->deleteNoCommit($query1);
+            try {
+                $query2 = "DELETE FROM YOGA_POSE
+                 WHERE ID = '$yogaPoseId'";
+                $rowCount = $this->dataManager->deleteNoCommit($query2);
+                $this->dataManager->commit();
+                return $rowCount;
+            } catch (\PDOException $exception){
+                echo 'Exception -> ';
+                var_dump($exception->getMessage());
+                $this->dataManager->rollBack();
+                $this->dataManager->commit();
+            } throw $exception;
+
         } catch(PDOException $exception){
             echo 'Exception -> ';
             var_dump($exception->getMessage());
 
         } throw $exception;
-    }
-    public function removeYogaPose($yogaPose){
-        //check for associations in other tables
 
     }
     private function associatePoseAndCategories($lastInsertId, $categories){
