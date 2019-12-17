@@ -5,14 +5,13 @@ namespace yogaclass\src\dataaccess;
 use yogaclass\src\businessobjects\YogaPose;
 
 class YogaPoseDbGateway{
-    private $dbConnection;
+    private $dataManager;
 
     function __construct($persistenceUnitName) {
-        $this->dbConnection = DataManager::connect($persistenceUnitName);
+        $this->dataManager = new DataManager($persistenceUnitName);
     }
 
     public function addYogaPose(YogaPose $yogaPose){
-        $this->dbConnection->beginTransaction();
         try{
             $imagePath = $yogaPose->getImagePath();
             $poseName = $yogaPose->getPoseName();
@@ -23,17 +22,20 @@ class YogaPoseDbGateway{
             $query = "INSERT INTO YOGA_POSE 
                         (IMAGEPATH, POSENAME, POSEDESCRIPTION, LASTUPDATED)
                       VALUES ('$imagePath', '$poseName', '$poseDescription', NOW())";
-            $this->dbConnection->query($query);
-            $lastInsertId = $this->dbConnection->lastInsertId();
+            $this->dataManager->beginTransaction();
+            $this->dataManager->insertNoCommit($query);
+            $lastInsertId = $this->dataManager->lastInsertId();
             try {
-                $this->associatePoseAndCategories($lastInsertId, $categories);
+                $lastInsertId = $this->associatePoseAndCategories($lastInsertId, $categories);
+
             }catch (\PDOException $exception){
                 echo 'Exception -> ';
                 var_dump($exception->getMessage());
-                $this->dbConnection->rollBack();
+                $this->dataManager->rollBack();
+                $this->dataManager->commit();
                 exit($exception->getMessage());
             }
-            $this->dbConnection->commit();
+            $this->dataManager->commit();
             return $lastInsertId;
         } catch(PDOException $exception){
             echo 'Exception -> ';
@@ -51,9 +53,8 @@ class YogaPoseDbGateway{
                 $query = "INSERT IGNORE INTO YOGA_POSE_CATEGORIES
                             (YOGA_POSE_ID, POSE_CATEGORY_NAME)
                           VALUES ('$lastInsertId', '$category')";
-                $this->dbConnection->query($query);
-                $lastInsertId = $this->dbConnection->lastInsertId();
-                return $lastInsertId;
+                $this->dataManager->insertNoCommit($query);
+                return $this->dataManager->lastInsertId();
             }
         } catch(PDOException $exception){
             echo 'Exception -> ';

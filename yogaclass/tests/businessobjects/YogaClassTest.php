@@ -1,10 +1,6 @@
 <?php
 
 namespace yogaclass\tests\businessobjects;
-
-
-require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaClass.php';
-require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaTeacher.php';
 use ArrayObject;
 use PHPUnit\Framework\TestCase;
 use yogaclass\src\businessobjects\YogaTeacher;

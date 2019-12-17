@@ -4,4 +4,17 @@
 
 require_once __DIR__ . '/composer/autoload_real.php';
 
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaPose.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaClass.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaTeacher.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'businessobjects'.DIRECTORY_SEPARATOR.'YogaPoseCategory.php';
+
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'dataaccess'.DIRECTORY_SEPARATOR.'YogaPoseDbGateway.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'dataaccess'.DIRECTORY_SEPARATOR.'DataManager.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'dataaccess'.DIRECTORY_SEPARATOR.'YogaClassDbGateway.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'dataaccess'.DIRECTORY_SEPARATOR.'DataManager.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'dataaccess'.DIRECTORY_SEPARATOR.'YogaPoseCategoryDbGateway.php';
+
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'services'.DIRECTORY_SEPARATOR.'YogaClassService.php';
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'yogaclass/src'.DIRECTORY_SEPARATOR.'commons'.DIRECTORY_SEPARATOR.'ConfigIniAccess.php';
 return ComposerAutoloaderInitd4cb6c30164a08aeb9d76d76ce8e36ea::getLoader();

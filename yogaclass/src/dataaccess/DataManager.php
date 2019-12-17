@@ -4,7 +4,6 @@
 namespace yogaclass\src\dataaccess;
 use PDO;
 use yogaclass\src\commons\ConfigIniAccess;
-require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'commons'.DIRECTORY_SEPARATOR.'ConfigIniAccess.php';
 class DataManager {
     public const PERSISTENCE_UNIT_NAME = 'YogaPersistenceUnit';
     private $connectionInfo;
@@ -31,17 +30,46 @@ class DataManager {
             var_dump($exception->getMessage());
         } throw $exception;
     }
-    public function execute($query){
+    public function insertWithCommit($query){
         $this->connectionInfo->beginTransaction();
         $statement = $this->connectionInfo->prepare($query);
         $statement->execute();
+        $lastInsertId = $this->connectionInfo->lastInsertId();
         $this->connectionInfo->commit();
-        $this->connectionInfo->lastInsertId();
+        return $lastInsertId;
     }
-
-    public function fetchAll($query){
+    public function deleteWithCommit($query){
+        $this->connectionInfo->beginTransaction();
         $statement = $this->connectionInfo->prepare($query);
-        return $statement->fetchAll();
+        $statement->execute();
+        $rowCount =  $statement->rowCount();
+        $this->connectionInfo->commit();
+
+       return $rowCount;
+    }
+    public function beginTransaction(){
+        $this->connectionInfo->beginTransaction();
+    }
+    public function insertNoCommit($query){
+        $statement = $this->connectionInfo->prepare($query);
+        $statement->execute();
+        return $this->connectionInfo->lastInsertId();
+    }
+    public function commit(){
+        $this->connectionInfo->commit();
+    }
+    public function rollback(){
+        $this->connectionInfo->rollBack();
+    }
+    public function lastInsertId(){
+        return $this->connectionInfo->lastInsertId();
+    }
+    public function fetchAll($query){
+        $this->connectionInfo->beginTransaction();
+        $statement = $this->connectionInfo->prepare($query);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
     }
     public function getAttribute($attr){
        return $this->connectionInfo->getAttribute($attr);

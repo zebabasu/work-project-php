@@ -1,18 +1,13 @@
 <?php
 
-namespace yogaclass\tests\dataaccess\functional;
 
-use PHPUnit\Framework\TestCase;
-use yogaclass\src\dataaccess\YogaPoseCategoryDbGateway;
 use yogaclass\src\businessobjects\YogaPoseCategory;
-use \yogaclass\src\dataaccess\DataManager;
+use yogaclass\src\dataaccess\DataManager;
+use yogaclass\src\dataaccess\YogaPoseCategoryDbGateway;
+use yogaclass\src\services\YogaPoseCategoryService;
+use PHPUnit\Framework\TestCase;
 
-/**
- * Class YogaPoseCategoryDbGatewayTest
- * @package yogaclass\tests\dataaccess
- * these aren't true unit tests as they need a database connection in yogaclass/config/config.ini
- */
-class YogaPoseCategoryDbGatewayTest {
+class YogaPoseCategoryServiceTest extends TestCase {
 
     public static function testAddYogaPoseCategory() {
 
@@ -33,5 +28,8 @@ class YogaPoseCategoryDbGatewayTest {
         $ypc5 = new YogaPoseCategory('inversion', time());
         $dbGateway->addYogaPoseCategory($ypc5);
     }
+
+    public function testGetAllYogaPoseCategory() {
+
+    }
 }
-YogaPoseCategoryDbGatewayTest::testAddYogaPoseCategory();
