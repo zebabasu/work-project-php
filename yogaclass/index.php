@@ -1,8 +1,8 @@
 <?php
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use \yogaclass\src\services\YogaClassService;
-use \yogaclass\src\services\YogaTeacherService;
+use yogaclass\src\controllers\YogaClassController;
+use yogaclass\src\controllers\YogaTeacherController;
 require '../vendor/autoload.php';
 $config = [
     'settings' => [
@@ -15,67 +15,24 @@ $config = [
     ],
 ];
 $app = new Slim\App($config);
-/*$app->get('/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name'];
-    $response->getBody()->write("Hello, $name");
+$container = $app->getContainer();
+$container[YogaTeacherController::class] = function ($c){
+    return new YogaTeacherController($c);
+};
+$container[YogaClassController::class] = function ($c){
+    return new YogaClassController($c);
+};
+$app->get('/yogateachers', YogaTeacherController::class . ":allYogaTeachers");
+$app->get('/yogateachers/{name}', YogaTeacherController::class . ":allYogaTeacherName");
+$app->get('/yogaclasses', YogaClassController::class . ":allYogaClasses");
 
-    return $response;
-});*/
-$app->group('/hello/{name}', function () {
+
+$app->group('/home/{name}', function () {
     $this->map(['GET'], '', function (Request $request, Response $response, array $args) {
         $name = $args['name'];
         $response->getBody()->write("Hello, $name");
 
         return $response;
     });
-});
-
-$app->group('/yogateachers', function () {
-    /*$this->map(['GET'], '', function (Request $request, Response $response) {
-        $yogaTeacherService = new YogaTeacherService();
-        $jsonYTL = $yogaTeacherService->getAllYogaTeachers();
-        return $response->withJson($jsonYTL);
-        //return $response->getBody()->write(var_export($jsonYCL, true));
-    });*/
-    $this->get('', function (Request $request, Response $response, array $args) {
-        $filter2 = $request->getQueryParam('name');
-        var_dump($filter2);
-        $yogaTeacherService = new YogaTeacherService();
-        $jsonYTL = $yogaTeacherService->getAllYogaTeachers();
-        return $response->withJson($jsonYTL);
-    });
-    $this->get('/{name}', function (Request $request, Response $response, array $args) {
-        $name = $args['name'];
-        $yogaTeacherService = new YogaTeacherService();
-        $jsonYT = $yogaTeacherService->getYogaTeacherByName($name);
-        return $response->withJson($jsonYT);
-    });
-});
-$app->group('/yogaclasses', function () {
-
-    $this->map(['GET'], '', function (Request $request, Response $response) {
-        $yogaClassService = new YogaClassService();
-        $jsonYCL = $yogaClassService->getAllYogaClasses();
-        return $response->withJson($jsonYCL);
-        //return $response->getBody()->write(var_export($jsonYCL, true));
-    });
-    /*$this->get('/{id}', function (Request $request, Response $response, $args) {
-        if(todoIdValid($args['id'])) {
-            return $response->withJson(['message' => "Todo ".$args['id']]);
-        }
-        return $response->withJson(['message' => 'Todo Not Found'], 404);
-    });
-    $this->map(['POST', 'PUT', 'PATCH'], '/{id}', function (Request $request, Response $response, $args) {
-        if(todoIdValid($args['id'])) {
-            return $response->withJson(['message' => "Todo ".$args['id']." updated successfully"]);
-        }
-        return $response->withJson(['message' => 'Todo Not Found'], 404);
-    });
-    $this->delete('/{id}', function (Request $request, Response $response, $args) {
-        if(todoIdValid($args['id'])) {
-            return $response->withJson(['message' => "Todo ".$args['id']." deleted successfully"]);
-        }
-        return $response->withJson(['message' => 'Todo Not Found'], 404);
-    });*/
 });
 $app->run();

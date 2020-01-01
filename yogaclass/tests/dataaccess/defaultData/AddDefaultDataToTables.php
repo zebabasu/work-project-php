@@ -24,7 +24,7 @@ class AddDefaultDataToTables extends TestCase {
 
     public function testAddYogaTeacher2(){
         /*********************************/
-        $this->markTestSkipped('skip test testAddYogaTeacher2');
+       // $this->markTestSkipped('skip test testAddYogaTeacher2');
         /*********************************/
 
         $yogaTeacher = new YogaTeacher("Zeba", "zeba@email.com");
@@ -46,7 +46,7 @@ class AddDefaultDataToTables extends TestCase {
 
     public function testAddYogaPoseCategory() {
         /*********************************/
-        $this->markTestSkipped('skip test testAddYogaPoseCategory');
+        //$this->markTestSkipped('skip test testAddYogaPoseCategory');
         /*********************************/
         $dbGateway = new YogaPoseCategoryDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
 
