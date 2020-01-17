@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 class YogaClassDbGatewayTest extends TestCase{
 
     private $lastInsertId;
-    public function testAddYogaClass(){
+    protected function setUp(){
 
         $yogaTeacher = new YogaTeacher();
         $yogaClass = new YogaClass("Slow Vinyasa Flow", 1, $yogaTeacher);
@@ -24,6 +24,11 @@ class YogaClassDbGatewayTest extends TestCase{
         $this->assertNotNull($this->lastInsertId);
     }
 
+    public function testGetYogaClassDetails(){
+        $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
+        $yogaClass = $dbGateway->getYogaClassDetails($this->lastInsertId);
+        $this->assertEquals("Slow Vinyasa Flow", $yogaClass[0]['CLASSNAME']);
+    }
     protected function tearDown(): void
     {
         $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);

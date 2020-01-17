@@ -43,9 +43,21 @@ class YogaClassDbGateway {
         } throw $exception;
 
     }
+    public function getYogaClassDetails($id){
+        try {
+            $query = "SELECT * FROM YOGA_CLASS
+                 WHERE ID = '$id'";
+            return $this->dataManager->fetchAll($query);
+
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
+
+    }
     public function getAllYogaClasses(){
        try{
-           $query = "SELECT CLASSNAME, YOGATEACHER_NAME, YOGATEACHER_EMAIL_ID, PUBLICSHARED FROM YOGA_CLASS";
+           $query = "SELECT ID, CLASSNAME, YOGATEACHER_NAME, YOGATEACHER_EMAIL_ID, PUBLICSHARED FROM YOGA_CLASS";
             return $this->dataManager->fetchAll($query);
 
         } catch(Exception $exception){

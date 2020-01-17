@@ -24,7 +24,7 @@ class AddDefaultDataToTables extends TestCase {
 
     public function testAddYogaTeacher2(){
         /*********************************/
-       // $this->markTestSkipped('skip test testAddYogaTeacher2');
+        $this->markTestSkipped('skip test testAddYogaTeacher2');
         /*********************************/
 
         $yogaTeacher = new YogaTeacher("Zeba", "zeba@email.com");
@@ -35,7 +35,7 @@ class AddDefaultDataToTables extends TestCase {
 
     public function testAddYogaClass(){
         /*********************************/
-        //$this->markTestSkipped('skip test testAddYogaClass');
+        $this->markTestSkipped('skip test testAddYogaClass');
         /*********************************/
         $yogaTeacher = new YogaTeacher();
         $yogaClass = new YogaClass("Default Slow Vinyasa Flow", 1, $yogaTeacher);
@@ -44,9 +44,20 @@ class AddDefaultDataToTables extends TestCase {
         $this->assertNotNull($lastInsertId);
     }
 
+    public function testAddYogaClass2(){
+        /*********************************/
+        //$this->markTestSkipped('skip test testAddYogaClass');
+        /*********************************/
+        $yogaTeacher = new YogaTeacher("Zeba", "zeba@email.com");
+        $yogaClass = new YogaClass("Hatha Yoga", 1, $yogaTeacher);
+        $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
+        $lastInsertId = $dbGateway->addYogaClass($yogaClass);
+        $this->assertNotNull($lastInsertId);
+    }
+
     public function testAddYogaPoseCategory() {
         /*********************************/
-        //$this->markTestSkipped('skip test testAddYogaPoseCategory');
+        $this->markTestSkipped('skip test testAddYogaPoseCategory');
         /*********************************/
         $dbGateway = new YogaPoseCategoryDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
 

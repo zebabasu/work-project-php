@@ -3,6 +3,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use yogaclass\src\controllers\YogaClassController;
 use yogaclass\src\controllers\YogaTeacherController;
+header("Access-Control-Allow-Origin: *");
 require '../vendor/autoload.php';
 $config = [
     'settings' => [

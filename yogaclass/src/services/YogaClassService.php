@@ -20,6 +20,9 @@ class YogaClassService {
         $listYogaClass = $this->dbGateway->getAllYogaClasses();
         return $listYogaClass;
     }
+    public function getYogaClassDetails($id){
+        $this->dbGateway->getYogaClassDetails($id);
+    }
     public function removeYogaClass($id){
         $this->dbGateway->removeYogaClass($id);
     }

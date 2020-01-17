@@ -47,15 +47,14 @@ class DataManager {
 
        return $rowCount;
     }
-    public function beginTransaction(){
-        $this->connectionInfo->beginTransaction();
-    }
     public function insertNoCommit($query){
+        $this->connectionInfo->beginTransaction();
         $statement = $this->connectionInfo->prepare($query);
         $statement->execute();
         return $this->connectionInfo->lastInsertId();
     }
     public function deleteNoCommit($query){
+        $this->connectionInfo->beginTransaction();
         $statement = $this->connectionInfo->prepare($query);
         $statement->execute();
         $rowCount =  $statement->rowCount();

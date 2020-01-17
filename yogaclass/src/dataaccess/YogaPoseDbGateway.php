@@ -22,7 +22,7 @@ class YogaPoseDbGateway{
             $query = "INSERT INTO YOGA_POSE 
                         (IMAGEPATH, POSENAME, POSEDESCRIPTION, LASTUPDATED)
                       VALUES ('$imagePath', '$poseName', '$poseDescription', NOW())";
-            $this->dataManager->beginTransaction();
+
             $this->dataManager->insertNoCommit($query);
             $lastInsertId = $this->dataManager->lastInsertId();
             try {
@@ -42,7 +42,6 @@ class YogaPoseDbGateway{
     }
     public function removeYogaPose($yogaPoseId){
         try {
-            $this->dataManager->beginTransaction();
             $query1 = "DELETE FROM YOGA_POSE_CATEGORIES
                  WHERE YOGA_POSE_ID = '$yogaPoseId'";
             $this->dataManager->deleteNoCommit($query1);
