@@ -26,6 +26,7 @@ $container[YogaClassController::class] = function ($c){
 $app->get('/yogateachers', YogaTeacherController::class . ":allYogaTeachers");
 $app->get('/yogateachers/{name}', YogaTeacherController::class . ":allYogaTeacherName");
 $app->get('/yogaclasses', YogaClassController::class . ":allYogaClasses");
+$app->get('/yogaclasses/{id}', YogaClassController::class . ":yogaClassDetails");
 
 
 $app->group('/home/{name}', function () {

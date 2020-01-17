@@ -15,4 +15,9 @@ class YogaClassController {
         $jsonYCL = $yogaClassService->getAllYogaClasses();
         return $response->withJson($jsonYCL);
     }
+    public function yogaClassDetails($request, $response, $args){
+        $yogaClassService = new YogaClassService();
+        $jsonYCL = $yogaClassService->getYogaClassDetails($args['id']);
+        return $response->withJson($jsonYCL);
+    }
 }
