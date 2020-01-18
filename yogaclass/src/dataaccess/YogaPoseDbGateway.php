@@ -22,7 +22,7 @@ class YogaPoseDbGateway{
             $query = "INSERT INTO YOGA_POSE 
                         (IMAGEPATH, POSENAME, POSEDESCRIPTION, LASTUPDATED)
                       VALUES ('$imagePath', '$poseName', '$poseDescription', NOW())";
-
+            $this->dataManager->beginTransaction();
             $this->dataManager->insertNoCommit($query);
             $lastInsertId = $this->dataManager->lastInsertId();
             try {
@@ -30,14 +30,11 @@ class YogaPoseDbGateway{
                 $this->dataManager->commit();
                 return $lastInsertId;
             }catch (\PDOException $exception){
-                echo 'Exception -> ';
-                var_dump($exception->getMessage());
                 $this->dataManager->rollBack();
-                $this->dataManager->commit();
+                //$this->dataManager->commit();
             } throw $exception;
         } catch(PDOException $exception){
-            echo 'Exception -> ';
-            var_dump($exception->getMessage());
+
        } throw $exception;
     }
     public function removeYogaPose($yogaPoseId){

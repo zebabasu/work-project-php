@@ -48,7 +48,7 @@ class DataManager {
        return $rowCount;
     }
     public function insertNoCommit($query){
-        $this->connectionInfo->beginTransaction();
+       // $this->connectionInfo->beginTransaction();
         $statement = $this->connectionInfo->prepare($query);
         $statement->execute();
         return $this->connectionInfo->lastInsertId();
@@ -78,5 +78,8 @@ class DataManager {
     }
     public function getAttribute($attr){
        return $this->connectionInfo->getAttribute($attr);
+    }
+    public function beginTransaction(){
+        $this->connectionInfo->beginTransaction();
     }
 }

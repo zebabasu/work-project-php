@@ -3,11 +3,13 @@
 
 use PHPUnit\Framework\TestCase;
 use yogaclass\src\businessobjects\YogaClass;
+use yogaclass\src\businessobjects\YogaPose;
 use yogaclass\src\businessobjects\YogaPoseCategory;
 use yogaclass\src\businessobjects\YogaTeacher;
 use yogaclass\src\dataaccess\DataManager;
 use yogaclass\src\dataaccess\YogaClassDbGateway;
 use yogaclass\src\dataaccess\YogaPoseCategoryDbGateway;
+use yogaclass\src\dataaccess\YogaPoseDbGateway;
 use yogaclass\src\dataaccess\YogaTeacherDbGateway;
 class AddDefaultDataToTables extends TestCase {
 
@@ -46,7 +48,7 @@ class AddDefaultDataToTables extends TestCase {
 
     public function testAddYogaClass2(){
         /*********************************/
-        //$this->markTestSkipped('skip test testAddYogaClass');
+        $this->markTestSkipped('skip test testAddYogaClass');
         /*********************************/
         $yogaTeacher = new YogaTeacher("Zeba", "zeba@email.com");
         $yogaClass = new YogaClass("Hatha Yoga", 1, $yogaTeacher);
@@ -76,6 +78,18 @@ class AddDefaultDataToTables extends TestCase {
         $ypc5 = new YogaPoseCategory('inversion', time());
         $dbGateway->addYogaPoseCategory($ypc5);
     }
+    /*********************************/
+    //$this->markTestSkipped('skip test testAddYogaPose');
+    /*********************************/
+    public function testAddYogaPose() {
+        $yogaPose1 = new YogaPose("c:/yoga-image-path/salambasirsasan.PNG", "Salamba Sirsasan/Supported Headstand", "Strengthens your arms and shoulders", array("inversion"));
+        $yogaPose2 = new YogaPose("c:/yoga-image-path/sarvangasan.PNG", "Sarvangasan/Shoulderstand", "Stretches the shoulders and neck", array("inversion"));
+        $yogaPose3 = new YogaPose("c:/yoga-image-path/vrikshasan.PNG", "Vrikshasan.PNG/Tree Pose", "Strengthens your arms and shoulders", array("standing"));
 
+        $dbGateway = new YogaPoseDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
+        $dbGateway->addYogaPose($yogaPose1);
+        $dbGateway->addYogaPose($yogaPose2);
+        $dbGateway->addYogaPose($yogaPose3);
+    }
 
 }

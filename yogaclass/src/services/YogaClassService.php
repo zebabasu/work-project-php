@@ -12,9 +12,10 @@ class YogaClassService {
     public function __construct(){
         $this->dbGateway = new YogaClassDbGateway();
     }
-    public function createYogaClass($className, $publicShared, YogaTeacher $yogateacher){
+    public function createYogaClass($className, $publicShared, YogaTeacher $yogateacher, array $poseIdList){
         $yogaClass = YogaClass($className, $publicShared, $yogateacher);
-        $this->dbGateway->addYogaClass($yogaClass);
+        $lastInsertId = $this->dbGateway->addYogaClass($yogaClass);
+        $this->dbGateway->addPosesToYogaClass($lastInsertId, $poseIdList);
     }
     public function getAllYogaClasses(){
         $listYogaClass = $this->dbGateway->getAllYogaClasses();

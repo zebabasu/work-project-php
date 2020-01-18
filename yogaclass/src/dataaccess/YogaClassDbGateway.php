@@ -36,6 +36,7 @@ class YogaClassDbGateway {
         try {
             $query = "DELETE FROM YOGA_CLASS
                  WHERE ID = '$id'";
+            //TODO need to delete from yoga_class_poses
             return $this->dataManager->deleteWithCommit($query);
         } catch(Exception $exception){
             echo 'Exception -> ';
@@ -64,5 +65,8 @@ class YogaClassDbGateway {
             echo 'Exception -> ';
             var_dump($exception->getMessage());
         } throw $exception;
+    }
+    public function addPosesToYogaClass($yogaClassId, array $poseIdList){
+
     }
 }
