@@ -10,7 +10,21 @@ class YogaClass implements \JsonSerializable {
     private $yogaTeacherName;
     private $yogaTeacherEmailId;
     private $publicShared;
+    private $poseIdList;
 
+    /**
+     * @return array
+     */
+    public function getPoseIdList(): array {
+        return $this->poseIdList;
+    }
+
+    /**
+     * @param array $poseIdList
+     */
+    public function setPoseIdList(array $poseIdList): void {
+        $this->poseIdList = $poseIdList;
+    }
     /**
      * YogaClass constructor.
      * @param $className

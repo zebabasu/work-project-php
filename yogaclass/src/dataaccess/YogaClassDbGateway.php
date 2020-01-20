@@ -44,10 +44,23 @@ class YogaClassDbGateway {
         } throw $exception;
 
     }
-    public function getYogaClassDetails($id){
+    /*public function getYogaClassDetails($id){
         try {
             $query = "SELECT * FROM YOGA_CLASS
                  WHERE ID = '$id'";
+            return $this->dataManager->fetchAll($query);
+
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
+
+    }*/
+    public function getYogaClassDetails($id){
+        try {
+            $query = "SELECT C.ID, C.CLASSNAME, C.YOGATEACHER_NAME, C.YOGATEACHER_EMAIL_ID, C.PUBLICSHARED , CP.YOGA_POSE_ID, P.POSENAME, P.IMAGEPATH FROM YOGA_CLASS AS C
+                        LEFT  JOIN(YOGA_CLASS_POSES AS CP CROSS JOIN YOGA_POSE AS P ) ON (C.ID=CP.YOGA_CLASS_ID AND CP.YOGA_POSE_ID = P.ID )
+                        WHERE C.ID='$id' ";
             return $this->dataManager->fetchAll($query);
 
         } catch(Exception $exception){
@@ -66,7 +79,30 @@ class YogaClassDbGateway {
             var_dump($exception->getMessage());
         } throw $exception;
     }
-    public function addPosesToYogaClass($yogaClassId, array $poseIdList){
+    public function addYogaClassPose($yogaClassId, $poseId){
+        try{
+                $query = "INSERT INTO YOGA_CLASS_POSES 
+                        (YOGA_CLASS_ID, YOGA_POSE_ID)
+                      VALUES ('$yogaClassId', '$poseId')";
 
+            return $this->dataManager->insertWithCommit($query);
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
+    }
+    public function addYogaClassPoses($yogaClassId, array $poseIdList){
+        foreach ($poseIdList as $poseId) {
+            try{
+                $query = "INSERT INTO YOGA_CLASS_POSES 
+                        (YOGA_CLASS_ID, YOGA_POSE_ID)
+                      VALUES ('$yogaClassId', '$poseId')";
+
+                return $this->dataManager->insertWithCommit($query);
+            } catch(Exception $exception){
+                echo 'Exception -> ';
+                var_dump($exception->getMessage());
+            } throw $exception;
+        }
     }
 }

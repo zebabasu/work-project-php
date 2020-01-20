@@ -22,18 +22,20 @@ class YogaClassDbGatewayTest extends TestCase{
         $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
         $this->lastInsertId= $dbGateway->addYogaClass($yogaClass);
         $this->assertNotNull($this->lastInsertId);
-    }
 
+    }
     public function testGetYogaClassDetails(){
         $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
         $yogaClass = $dbGateway->getYogaClassDetails($this->lastInsertId);
         $this->assertEquals("Slow Vinyasa Flow", $yogaClass[0]['CLASSNAME']);
     }
+
     protected function tearDown(): void
     {
         $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
         $countRowsDeleted = $dbGateway->removeYogaClass($this->lastInsertId);
         $this->assertEquals(1, $countRowsDeleted);
     }
+
 }
 

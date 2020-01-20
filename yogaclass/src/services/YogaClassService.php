@@ -15,7 +15,7 @@ class YogaClassService {
     public function createYogaClass($className, $publicShared, YogaTeacher $yogateacher, array $poseIdList){
         $yogaClass = YogaClass($className, $publicShared, $yogateacher);
         $lastInsertId = $this->dbGateway->addYogaClass($yogaClass);
-        $this->dbGateway->addPosesToYogaClass($lastInsertId, $poseIdList);
+        $this->dbGateway->addYogaClassPoses($lastInsertId, $poseIdList);
     }
     public function getAllYogaClasses(){
         $listYogaClass = $this->dbGateway->getAllYogaClasses();
