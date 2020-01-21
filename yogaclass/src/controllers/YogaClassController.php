@@ -20,4 +20,10 @@ class YogaClassController {
         $jsonYCL = $yogaClassService->getYogaClassDetails($args['id']);
         return $response->withJson($jsonYCL);
     }
+    public function createYogaClass($request, $response, $args){
+
+        $yogaClassData = $request->getParsedBody();
+        $yogaClassService = new YogaClassService();
+        $yogaClassService->createYogaClass($yogaClassData);
+    }
 }

@@ -1,14 +1,10 @@
 {
-    "0": {
-        "className": "Slow Flow",
-        "yogaTeacherName": "Default Yoga Teacher",
-        "yogaTeacherEmailId": "teacher@email.com",
-        "publicShared": 1
-    },
-    "1": {
-        "className": "Ashtanga Primary",
-        "yogaTeacherName": "Default Yoga Teacher",
-        "yogaTeacherEmailId": "teacher@email.com",
-        "publicShared": 0
-    }
+    "className": "Slow Flow",
+    "yogaTeacherName": "Default Yoga Teacher",
+    "yogaTeacherEmailId": "teacher@email.com",
+    "publicShared": 1,
+    "poseIdList": [
+        17,
+        18
+    ]
 }

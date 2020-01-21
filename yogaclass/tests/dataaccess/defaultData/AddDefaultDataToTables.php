@@ -57,6 +57,19 @@ class AddDefaultDataToTables extends TestCase {
         $this->assertNotNull($lastInsertId);
     }
 
+    public function testAddYogaClass3(){
+        /*********************************/
+        $this->markTestSkipped('skip test testAddYogaClass3');
+        /*********************************/
+        $yogaTeacher = new YogaTeacher("Zeba", "zeba@email.com");
+        $yogaClass = new YogaClass("Ashtanga Yoga", 1, $yogaTeacher);
+        $poseList1 = [17, 18];
+        $yogaClass->setPoseIdList($poseList1);
+        $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
+        $lastInsertId = $dbGateway->addYogaClass($yogaClass);
+        $this->assertNotNull($lastInsertId);
+    }
+
     public function testAddYogaPoseCategory() {
         /*********************************/
         $this->markTestSkipped('skip test testAddYogaPoseCategory');
@@ -78,10 +91,11 @@ class AddDefaultDataToTables extends TestCase {
         $ypc5 = new YogaPoseCategory('inversion', time());
         $dbGateway->addYogaPoseCategory($ypc5);
     }
-    /*********************************/
-    //$this->markTestSkipped('skip test testAddYogaPose');
-    /*********************************/
+
     public function testAddYogaPose() {
+        /*********************************/
+        $this->markTestSkipped('skip test testAddYogaPoseCategory');
+        /*********************************/
         $yogaPose1 = new YogaPose("c:/yoga-image-path/salambasirsasan.PNG", "Salamba Sirsasan/Supported Headstand", "Strengthens your arms and shoulders", array("inversion"));
         $yogaPose2 = new YogaPose("c:/yoga-image-path/sarvangasan.PNG", "Sarvangasan/Shoulderstand", "Stretches the shoulders and neck", array("inversion"));
         $yogaPose3 = new YogaPose("c:/yoga-image-path/vrikshasan.PNG", "Vrikshasan.PNG/Tree Pose", "Strengthens your arms and shoulders", array("standing"));
