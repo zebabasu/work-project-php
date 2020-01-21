@@ -3,6 +3,7 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use yogaclass\src\controllers\YogaClassController;
 use yogaclass\src\controllers\YogaTeacherController;
+use yogaclass\src\controllers\YogaPoseController;
 header("Access-Control-Allow-Origin: *");
 require '../vendor/autoload.php';
 $config = [
@@ -23,6 +24,10 @@ $container[YogaTeacherController::class] = function ($c){
 $container[YogaClassController::class] = function ($c){
     return new YogaClassController($c);
 };
+$container[YogaPoseController::class] = function ($c){
+    return new YogaPoseController($c);
+};
+$app->get('/yogaposes', YogaPoseController::class . ":allPoses");
 $app->get('/yogateachers', YogaTeacherController::class . ":allYogaTeachers");
 $app->get('/yogateachers/{name}', YogaTeacherController::class . ":allYogaTeacherName");
 $app->get('/yogaclasses', YogaClassController::class . ":allYogaClasses");

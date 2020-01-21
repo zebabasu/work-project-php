@@ -7,10 +7,20 @@ use yogaclass\src\businessobjects\YogaPose;
 class YogaPoseDbGateway{
     private $dataManager;
 
-    function __construct($persistenceUnitName) {
+    function __construct($persistenceUnitName='YogaPersistenceUnit') {
         $this->dataManager = new DataManager($persistenceUnitName);
     }
+    public function getYogaPoses(){
 
+        try{
+            $query = "SELECT ID, IMAGEPATH, LASTUPDATED, POSEDESCRIPTION, POSENAME FROM YOGA_POSE";
+            return $this->dataManager->fetchAll($query);
+
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
+    }
     public function addYogaPose(YogaPose $yogaPose){
         try{
             $imagePath = $yogaPose->getImagePath();
@@ -76,4 +86,5 @@ class YogaPoseDbGateway{
             var_dump($exception->getMessage());
         } throw $exception;
     }
+
 }

@@ -96,9 +96,9 @@ class AddDefaultDataToTables extends TestCase {
         /*********************************/
         $this->markTestSkipped('skip test testAddYogaPoseCategory');
         /*********************************/
-        $yogaPose1 = new YogaPose("c:/yoga-image-path/salambasirsasan.PNG", "Salamba Sirsasan/Supported Headstand", "Strengthens your arms and shoulders", array("inversion"));
-        $yogaPose2 = new YogaPose("c:/yoga-image-path/sarvangasan.PNG", "Sarvangasan/Shoulderstand", "Stretches the shoulders and neck", array("inversion"));
-        $yogaPose3 = new YogaPose("c:/yoga-image-path/vrikshasan.PNG", "Vrikshasan.PNG/Tree Pose", "Strengthens your arms and shoulders", array("standing"));
+        $yogaPose1 = new YogaPose("salambasirsasan.PNG", "Salamba Sirsasan/Supported Headstand", "Strengthens your arms and shoulders", array("inversion"));
+        $yogaPose2 = new YogaPose("sarvangasan.PNG", "Sarvangasan/Shoulderstand", "Stretches the shoulders and neck", array("inversion"));
+        $yogaPose3 = new YogaPose("vrikshasan.PNG", "Vrikshasan.PNG/Tree Pose", "Strengthens your arms and shoulders", array("standing"));
 
         $dbGateway = new YogaPoseDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
         $dbGateway->addYogaPose($yogaPose1);
