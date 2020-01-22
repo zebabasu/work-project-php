@@ -25,6 +25,8 @@ class YogaClassController {
         $yogaClassData = $request->getParsedBody();
         $yogaClassService = new YogaClassService();
         $status = $yogaClassService->createYogaClass($yogaClassData);
-        $response->withStatus($status);
+        $response->write($status);
+        $response->withStatus(200);
     }
+
 }

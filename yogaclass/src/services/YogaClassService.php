@@ -19,8 +19,8 @@ class YogaClassService {
     }*/
     public function createYogaClass($yogaClassJsonData){
         $yogaClass = YogaClass::createYogaClassFromJson($yogaClassJsonData);
-        $this->dbGateway->addYogaClass($yogaClass);
-        return http_response_code(200);
+        $lastInsertId = $this->dbGateway->addYogaClass($yogaClass);
+        return $lastInsertId;
     }
     public function getAllYogaClasses(){
         $listYogaClass = $this->dbGateway->getAllYogaClasses();

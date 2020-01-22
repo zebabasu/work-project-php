@@ -24,22 +24,21 @@ class YogaClassTest extends TestCase {
 
     public static function createMockYogaClassArray(): ArrayObject {
         $listYogaClass = new ArrayObject();
-        $yogaTeacher = new YogaTeacher();
         $poseList1 = [17, 18];
-        $yogaClass1 = new YogaClass("Slow Flow", 1, $yogaTeacher);
+        $yogaClass1 = new YogaClass("Slow Flow");
         $yogaClass1->setPoseIdList($poseList1);
         $listYogaClass->append($yogaClass1);
 
-        $yogaClass2 = new YogaClass("Ashtanga Primary", 0, $yogaTeacher);
+        $yogaClass2 = new YogaClass("Ashtanga Primary");
+        $yogaClass2->setPublicShared(0);
         $yogaClass2->setPoseIdList($poseList1);
         $listYogaClass->append($yogaClass2);
         return $listYogaClass;
     }
     public static function createMockYogaClass() {
 
-        $yogaTeacher = new YogaTeacher();
         $poseList1 = [17, 18];
-        $yogaClass1 = new YogaClass("Slow Flow", 1, $yogaTeacher);
+        $yogaClass1 = new YogaClass("Slow Flow");
         $yogaClass1->setPoseIdList($poseList1);
 
 

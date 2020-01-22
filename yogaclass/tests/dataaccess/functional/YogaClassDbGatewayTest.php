@@ -3,7 +3,6 @@
 namespace yogaclass\tests\dataaccess\functional;
 
 use yogaclass\src\businessobjects\YogaClass;
-use yogaclass\src\businessobjects\YogaTeacher;
 use yogaclass\src\dataaccess\YogaClassDbGateway;
 use yogaclass\src\dataaccess\DataManager;
 use PHPUnit\Framework\TestCase;
@@ -18,13 +17,13 @@ class YogaClassDbGatewayTest extends TestCase{
     private $lastInsertId2;
     protected function setUp(){
 
-        $yogaTeacher = new YogaTeacher();
-        $yogaClass = new YogaClass("Slow Vinyasa Flow Test", 1, $yogaTeacher);
+
+        $yogaClass = new YogaClass("Slow Vinyasa Flow Test");
         $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
         $this->lastInsertId= $dbGateway->addYogaClass($yogaClass);
         $this->assertNotNull($this->lastInsertId);
 
-        $yogaClass = new YogaClass("Slow Vinyasa Flow Test-2", 1, $yogaTeacher);
+        $yogaClass = new YogaClass("Slow Vinyasa Flow Test-2");
         $poseList1 = [17, 18];
         $yogaClass->setPoseIdList($poseList1);
         $dbGateway = new YogaClassDbGateway(DataManager::PERSISTENCE_UNIT_NAME);

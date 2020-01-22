@@ -5,6 +5,8 @@ use yogaclass\src\controllers\YogaClassController;
 use yogaclass\src\controllers\YogaTeacherController;
 use yogaclass\src\controllers\YogaPoseController;
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+
 require '../vendor/autoload.php';
 $config = [
     'settings' => [

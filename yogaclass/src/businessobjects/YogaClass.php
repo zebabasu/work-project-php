@@ -20,11 +20,12 @@ class YogaClass implements \JsonSerializable {
      * @param $publicShared
      *
      */
-    public function __construct($className, $publicShared, YogaTeacher $yogaTeacher) {
+    public function __construct($className) {
         $this->className = $className;
+        $yogaTeacher = new YogaTeacher();
         $this->yogaTeacherName = $yogaTeacher->getTeacherName();
         $this->yogaTeacherEmailId = $yogaTeacher->getEmailId();
-        $this->publicShared = $publicShared;
+        $this->publicShared = 1;
         $this->poseIdList = array();
     }
 
@@ -38,21 +39,21 @@ class YogaClass implements \JsonSerializable {
     /**
      * @param mixed $yogaTeacherName
      */
-    private function setYogaTeacherName($yogaTeacherName): void {
+    public function setYogaTeacherName($yogaTeacherName): void {
         $this->yogaTeacherName = $yogaTeacherName;
     }
 
     /**
      * @param mixed $yogaTeacherEmailId
      */
-    private function setYogaTeacherEmailId($yogaTeacherEmailId): void {
+    public function setYogaTeacherEmailId($yogaTeacherEmailId): void {
         $this->yogaTeacherEmailId = $yogaTeacherEmailId;
     }
 
     /**
      * @param mixed $publicShared
      */
-    private function setPublicShared($publicShared): void {
+    public function setPublicShared($publicShared): void {
         $this->publicShared = $publicShared;
     }
 
@@ -98,10 +99,17 @@ class YogaClass implements \JsonSerializable {
         return $this->publicShared;
     }
     public static function createYogaClassFromJson($jsonData): YogaClass{
-        $yogaTeacher = new YogaTeacher($jsonData['yogaTeacherName'], $jsonData['yogaTeacherEmailId']);
-        $yogaClass = new YogaClass($jsonData['className'], $jsonData['publicShared'], $yogaTeacher);
+        $yogaClass = new YogaClass($jsonData['className']);
+        if(isset($jsonData['publicShared'])){
+            $yogaClass->setPublicShared($jsonData['publicShared']);
+        }
         if(isset($jsonData['poseIdList'])) {
             $yogaClass->setPoseIdList($jsonData['poseIdList']);
+        }
+        if(isset($jsonData['yogaTeacherName']) && isset($jsonData['yogaTeacherEmailId'])) {
+
+            $yogaClass->setYogaTeacherName($jsonData['yogaTeacherName']);
+            $yogaClass->setYogaTeacherName($jsonData['yogaTeacherEmailId']);
         }
         return  $yogaClass;
 
