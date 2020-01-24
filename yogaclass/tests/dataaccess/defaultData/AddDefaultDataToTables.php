@@ -95,16 +95,22 @@ class AddDefaultDataToTables extends TestCase {
 
     public function testAddYogaPose() {
         /*********************************/
-        $this->markTestSkipped('skip test testAddYogaPoseCategory');
+        //$this->markTestSkipped('skip test testAddYogaPoseCategory');
         /*********************************/
-        $yogaPose1 = new YogaPose("salambasirsasan.PNG", "Salamba Sirsasan/Supported Headstand", "Strengthens your arms and shoulders", array("inversion"));
-        $yogaPose2 = new YogaPose("sarvangasan.PNG", "Sarvangasan/Shoulderstand", "Stretches the shoulders and neck", array("inversion"));
-        $yogaPose3 = new YogaPose("vrikshasan.PNG", "Vrikshasan.PNG/Tree Pose", "Strengthens your arms and shoulders", array("standing"));
+       // $yogaPose1 = new YogaPose("salambasirsasan.PNG", "Salamba Sirsasan/Supported Headstand", "Strengthens your arms and shoulders", array("inversion"));
+       //$yogaPose2 = new YogaPose("sarvangasan.PNG", "Sarvangasan/Shoulderstand", "Stretches the shoulders and neck", array("inversion"));
+       // $yogaPose3 = new YogaPose("vrikshasan.PNG", "Vrikshasan/Tree Pose", "Strengthens your arms and shoulders", array("standing"));
+        //$yogaPose4 = new YogaPose("siddhasan.PNG", "Siddhasan/perfect pose Pose", "helps to balance the activities of organs", array("sitting"));
+       // $yogaPose5 = new YogaPose("uttanasan.PNG", "Uttanasan/Forward Fold Pose", "stretches your hips, hamstrings, and calves", array("standing"));
+       // $yogaPose6 = new YogaPose("virabhadrsan.PNG", "Virabhadrsan/Tree Pose", "Strengthens the shoulders, arms and back muscles", array("standing"));
+        $yogaPose7 = new YogaPose("bakasan.PNG", "Bakasan/Crow Pose", "Arm Balance", array("standing"));
+        $yogaPose8 = new YogaPose("vrishchikasan.PNG", "Vrishchikasan/Tree Pose", "Improves balance and stability in the legs", array("standing"));
+        $yogaPose9 = new YogaPose("udita-padang-gustasan.PNG", "udita-padang-gustasan/Extended Hand-to-Big-Toe Pose", "Stretches Ankle, Leg", array("standing"));
 
         $dbGateway = new YogaPoseDbGateway(DataManager::PERSISTENCE_UNIT_NAME);
-        $dbGateway->addYogaPose($yogaPose1);
-        $dbGateway->addYogaPose($yogaPose2);
-        $dbGateway->addYogaPose($yogaPose3);
+        $dbGateway->addYogaPose($yogaPose7);
+        $dbGateway->addYogaPose($yogaPose8);
+        $dbGateway->addYogaPose($yogaPose9);
     }
 
 }
