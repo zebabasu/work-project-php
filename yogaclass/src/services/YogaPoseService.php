@@ -8,8 +8,8 @@ use yogaclass\src\dataaccess\YogaPoseDbGateway;
 class YogaPoseService {
 
     private $dbGateway;
-    public function __construct(){
-        $this->dbGateway = new YogaPoseDbGateway();
+    public function __construct($dbGateway){
+        $this->dbGateway = $dbGateway;
     }
     public function getAllYogaPoses(){
         $listYogaClass = $this->dbGateway->getYogaPoses();

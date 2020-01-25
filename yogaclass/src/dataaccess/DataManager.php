@@ -54,7 +54,7 @@ class DataManager {
         return $this->connectionInfo->lastInsertId();
     }
     public function deleteNoCommit($query){
-        $this->connectionInfo->beginTransaction();
+       // $this->connectionInfo->beginTransaction();
         $statement = $this->connectionInfo->prepare($query);
         $statement->execute();
         $rowCount =  $statement->rowCount();

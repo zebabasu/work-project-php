@@ -55,14 +55,11 @@ class YogaPoseDbGateway{
             try {
                 $query2 = "DELETE FROM YOGA_POSE
                  WHERE ID = '$yogaPoseId'";
-                $rowCount = $this->dataManager->deleteNoCommit($query2);
-                $this->dataManager->commit();
+                $rowCount = $this->dataManager->deleteWithCommit($query2);
                 return $rowCount;
             } catch (\PDOException $exception){
                 echo 'Exception -> ';
                 var_dump($exception->getMessage());
-                $this->dataManager->rollBack();
-                $this->dataManager->commit();
             } throw $exception;
 
         } catch(PDOException $exception){

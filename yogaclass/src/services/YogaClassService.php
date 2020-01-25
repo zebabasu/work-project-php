@@ -9,8 +9,8 @@ use yogaclass\src\dataaccess\YogaClassDbGateway;
 
 class YogaClassService {
     private $dbGateway;
-    public function __construct(){
-        $this->dbGateway = new YogaClassDbGateway();
+    public function __construct($dbGateway){
+        $this->dbGateway = $dbGateway;
     }
     /*public function createYogaClass($className, $publicShared, YogaTeacher $yogateacher, array $poseIdList){
         $yogaClass = YogaClass($className, $publicShared, $yogateacher);
