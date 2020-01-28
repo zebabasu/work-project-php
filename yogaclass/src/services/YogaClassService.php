@@ -2,23 +2,24 @@
 
 
 namespace yogaclass\src\services;
-
-
-use yogaclass\src\businessobjects\YogaClass;
-use yogaclass\src\dataaccess\YogaClassDbGateway;
+use yogaclass\src\commons\JsonToClassConverter;
 
 class YogaClassService {
     private $dbGateway;
-    public function __construct($dbGateway){
+    private $jsonConverter;
+    public function __construct($dbGateway, $jsonConverter=null){
+        if(!isset($jsonConverter)){
+            $this->jsonConverter=new JsonToClassConverter();
+        }
+        else{
+            $this->jsonConverter = $jsonConverter;
+        }
         $this->dbGateway = $dbGateway;
+
     }
-    /*public function createYogaClass($className, $publicShared, YogaTeacher $yogateacher, array $poseIdList){
-        $yogaClass = YogaClass($className, $publicShared, $yogateacher);
-        $lastInsertId = $this->dbGateway->addYogaClass($yogaClass);
-        $this->dbGateway->addYogaClassPoses($lastInsertId, $poseIdList);
-    }*/
+
     public function createYogaClass($yogaClassJsonData){
-        $yogaClass = YogaClass::createYogaClassFromJson($yogaClassJsonData);
+        $yogaClass = $this->jsonConverter->createYogaClassFromJson($yogaClassJsonData);
         $lastInsertId = $this->dbGateway->addYogaClass($yogaClass);
         return $lastInsertId;
     }
@@ -32,5 +33,7 @@ class YogaClassService {
     public function removeYogaClass($id){
         $this->dbGateway->removeYogaClass($id);
     }
-
+    public function updateYogaClass($updatedYogaClass){
+        $this->dbGateway->updateYogaClass($updatedYogaClass);
+    }
 }

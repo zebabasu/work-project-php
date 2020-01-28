@@ -98,22 +98,7 @@ class YogaClass implements \JsonSerializable {
     public function getPublicShared() {
         return $this->publicShared;
     }
-    public static function createYogaClassFromJson($jsonData): YogaClass{
-        $yogaClass = new YogaClass($jsonData['className']);
-        if(isset($jsonData['publicShared'])){
-            $yogaClass->setPublicShared($jsonData['publicShared']);
-        }
-        if(isset($jsonData['poseIdList'])) {
-            $yogaClass->setPoseIdList($jsonData['poseIdList']);
-        }
-        if(isset($jsonData['yogaTeacherName']) && isset($jsonData['yogaTeacherEmailId'])) {
 
-            $yogaClass->setYogaTeacherName($jsonData['yogaTeacherName']);
-            $yogaClass->setYogaTeacherName($jsonData['yogaTeacherEmailId']);
-        }
-        return  $yogaClass;
-
-    }
     public function jsonSerialize() {
         return [
             'className' => $this->className,

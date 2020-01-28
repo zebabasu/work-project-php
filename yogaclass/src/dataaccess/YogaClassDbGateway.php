@@ -119,4 +119,7 @@ class YogaClassDbGateway {
             } throw $exception;
         }
     }
+    public function updateYogaClass($updatedYogaClass){
+
+    }
 }

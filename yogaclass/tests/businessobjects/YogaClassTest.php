@@ -3,8 +3,8 @@
 namespace yogaclass\tests\businessobjects;
 use ArrayObject;
 use PHPUnit\Framework\TestCase;
-use yogaclass\src\businessobjects\YogaTeacher;
 use yogaclass\src\businessobjects\YogaClass;
+use yogaclass\src\commons\JsonToClassConverter;
 
 class YogaClassTest extends TestCase {
 
@@ -17,7 +17,9 @@ class YogaClassTest extends TestCase {
         $strFileContents = file_get_contents($jsonPath);
         $jsonData = json_decode($strFileContents, true);
 
-        $yogaClass = YogaClass::createYogaClassFromJson($jsonData);
+        $converter = new JsonToClassConverter();
+        $yogaClass = $converter->createYogaClassFromJson($jsonData);
+
         $this->assertSame("Slow Flow",$yogaClass->getClassName() );
         $this->assertSame(2,count($yogaClass->getPoseIdList()) );
     }
