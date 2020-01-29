@@ -33,7 +33,7 @@ class YogaPoseDbGateway{
                         (IMAGEPATH, POSENAME, POSEDESCRIPTION, LASTUPDATED)
                       VALUES ('$imagePath', '$poseName', '$poseDescription', NOW())";
             $this->dataManager->beginTransaction();
-            $this->dataManager->insertNoCommit($query);
+            $this->dataManager->executeNoCommit($query);
             $lastInsertId = $this->dataManager->lastInsertId();
             try {
                 $this->associatePoseAndCategories($lastInsertId, $categories);
@@ -75,7 +75,7 @@ class YogaPoseDbGateway{
                 $query = "INSERT IGNORE INTO YOGA_POSE_CATEGORIES
                             (YOGA_POSE_ID, POSE_CATEGORY_NAME)
                           VALUES ('$lastInsertId', '$category')";
-                $this->dataManager->insertNoCommit($query);
+                $this->dataManager->executeNoCommit($query);
                 return $this->dataManager->lastInsertId();
             }
         } catch(PDOException $exception){

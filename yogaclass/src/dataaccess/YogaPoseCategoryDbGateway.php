@@ -20,7 +20,7 @@ class YogaPoseCategoryDbGateway {
             $query = "INSERT INTO YOGA_POSE_CATEGORY 
                         (POSECATEGORYNAME, LASTUPDATED)
                       VALUES ('$poseCategoryName', NOW())";
-            return $this->dataManager->insertWithCommit($query);
+            return $this->dataManager->executeWithCommit($query);
         } catch(Exception $exception){
             echo 'Exception -> ';
             var_dump($exception->getMessage());

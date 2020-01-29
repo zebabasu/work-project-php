@@ -18,7 +18,7 @@ class YogaTeacherDbGateway {
             $query = "INSERT INTO YOGA_TEACHER 
                         (TEACHERNAME, EMAILID, LASTUPDATED)
                         VALUES ('$teacherName', '$emailId', NOW())";
-            return $this->dataManager->insertWithCommit($query);
+            return $this->dataManager->executeWithCommit($query);
         } catch(Exception $exception){
             echo 'Exception -> ';
             var_dump($exception->getMessage());

@@ -35,6 +35,7 @@ $app->get('/yogateachers/{name}', YogaTeacherController::class . ":allYogaTeache
 $app->get('/yogaclasses', YogaClassController::class . ":allYogaClasses");
 $app->get('/yogaclasses/{id}', YogaClassController::class . ":yogaClassDetails");
 $app->post('/yogaclasses', YogaClassController::class . ":createYogaClass" );
+$app->put('/yogaclasses', YogaClassController::class . ":updateYogaClass" );
 
 $app->group('/home/{name}', function () {
     $this->map(['GET'], '', function (Request $request, Response $response, array $args) {

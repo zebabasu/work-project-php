@@ -6,6 +6,20 @@ namespace yogaclass\src\businessobjects;
 
 class YogaClass implements \JsonSerializable {
     private $id;
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void {
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId() {
+        return $this->id;
+    }
     private $className;
     private $yogaTeacherName;
     private $yogaTeacherEmailId;

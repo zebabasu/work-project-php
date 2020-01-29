@@ -30,8 +30,10 @@ class DataManager {
             var_dump($exception->getMessage());
         } throw $exception;
     }
-    public function insertWithCommit($query){
-        $this->connectionInfo->beginTransaction();
+    public function executeWithCommit($query){
+        if(!$this->connectionInfo->inTransaction()) {
+            $this->connectionInfo->beginTransaction();
+        }
         $statement = $this->connectionInfo->prepare($query);
         $statement->execute();
         $lastInsertId = $this->connectionInfo->lastInsertId();
@@ -39,7 +41,9 @@ class DataManager {
         return $lastInsertId;
     }
     public function deleteWithCommit($query){
-        $this->connectionInfo->beginTransaction();
+        if(!$this->connectionInfo->inTransaction()) {
+            $this->connectionInfo->beginTransaction();
+        }
         $statement = $this->connectionInfo->prepare($query);
         $statement->execute();
         $rowCount =  $statement->rowCount();
@@ -47,7 +51,7 @@ class DataManager {
 
        return $rowCount;
     }
-    public function insertNoCommit($query){
+    public function executeNoCommit($query){
        // $this->connectionInfo->beginTransaction();
         $statement = $this->connectionInfo->prepare($query);
         $statement->execute();
@@ -70,7 +74,9 @@ class DataManager {
         return $this->connectionInfo->lastInsertId();
     }
     public function fetchAll($query){
-        $this->connectionInfo->beginTransaction();
+        if(!$this->connectionInfo->inTransaction()) {
+            $this->connectionInfo->beginTransaction();
+        }
         $statement = $this->connectionInfo->prepare($query);
         $statement->execute();
         $results = $statement->fetchAll();

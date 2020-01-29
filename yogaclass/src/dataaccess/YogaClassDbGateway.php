@@ -24,7 +24,7 @@ class YogaClassDbGateway {
                         (CLASSNAME, PUBLICSHARED, YOGATEACHER_NAME, YOGATEACHER_EMAIL_ID, LASTUPDATED)
                       VALUES ('$className', '$publicShared', '$teacherName', '$teacherEmailId', NOW())";
 
-            $lastInsertId = $this->dataManager->insertWithCommit($query);
+            $lastInsertId = $this->dataManager->executeWithCommit($query);
 
             $poseIdList = $yogaClass->getPoseIdList();
             if(isset($poseIdList)) {
@@ -32,7 +32,7 @@ class YogaClassDbGateway {
                     $query2 = "INSERT INTO YOGA_CLASS_POSES 
                                 (YOGA_CLASS_ID, YOGA_POSE_ID)
                                 VALUES ('$lastInsertId', '$poseId')";
-                    $this->dataManager->insertWithCommit($query2);
+                    $this->dataManager->executeWithCommit($query2);
                 }
             }
             return $lastInsertId;
@@ -40,14 +40,10 @@ class YogaClassDbGateway {
             echo 'Exception -> ';
             var_dump($exception->getMessage());
         } throw $exception;
-
-
     }
     public function removeYogaClass($id){
         try {
-            $query = "DELETE FROM YOGA_CLASS_POSES 
-                        WHERE YOGA_CLASS_ID = '$id' ";
-            $this->dataManager->deleteWithCommit($query);
+            $this->removeYogaClassPoses($id);
             $query2 = "DELETE FROM YOGA_CLASS
                  WHERE ID = '$id'";
 
@@ -99,7 +95,7 @@ class YogaClassDbGateway {
                         (YOGA_CLASS_ID, YOGA_POSE_ID)
                       VALUES ('$yogaClassId', '$poseId')";
 
-            return $this->dataManager->insertWithCommit($query);
+            return $this->dataManager->executeWithCommit($query);
         } catch(Exception $exception){
             echo 'Exception -> ';
             var_dump($exception->getMessage());
@@ -112,7 +108,7 @@ class YogaClassDbGateway {
                         (YOGA_CLASS_ID, YOGA_POSE_ID)
                       VALUES ('$yogaClassId', '$poseId')";
 
-                return $this->dataManager->insertWithCommit($query);
+                return $this->dataManager->executeWithCommit($query);
             } catch(Exception $exception){
                 echo 'Exception -> ';
                 var_dump($exception->getMessage());
@@ -120,6 +116,45 @@ class YogaClassDbGateway {
         }
     }
     public function updateYogaClass($updatedYogaClass){
+        try{
+            $id = $updatedYogaClass->getId();
+            $className = $updatedYogaClass->getClassName();
+            $publicShared = $updatedYogaClass->getPublicShared();
+            $teacherEmailId = $updatedYogaClass->getYogaTeacherEmailId();
+            $teacherName = $updatedYogaClass->getYogaTeacherName();
 
+            $query = "UPDATE YOGA_CLASS 
+                        SET CLASSNAME = '$className', 
+                            PUBLICSHARED = '$publicShared', 
+                            YOGATEACHER_NAME = '$teacherName', 
+                            YOGATEACHER_EMAIL_ID = '$teacherEmailId', 
+                            LASTUPDATED = NOW()
+                            WHERE ID = '$id'";
+           $this->dataManager->executeWithCommit($query);
+
+            $poseIdList = $updatedYogaClass->getPoseIdList();
+            $this->removeYogaClassPoses($id);
+            if(isset($poseIdList)) {
+                foreach ($poseIdList as $poseId) {
+                    $query2 = "INSERT INTO YOGA_CLASS_POSES 
+                                (YOGA_CLASS_ID, YOGA_POSE_ID)
+                                VALUES ('$id', '$poseId')";
+                    $this->dataManager->executeWithCommit($query2);
+                }
+            }
+            return $id;
+        } catch(Exception $exception){
+            echo 'Exception -> ';
+            var_dump($exception->getMessage());
+        } throw $exception;
+    }
+
+    /**
+     * @param $id
+     */
+    private function removeYogaClassPoses($id): void {
+        $query = "DELETE FROM YOGA_CLASS_POSES 
+                        WHERE YOGA_CLASS_ID = '$id' ";
+        $this->dataManager->deleteWithCommit($query);
     }
 }
