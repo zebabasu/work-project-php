@@ -10,6 +10,9 @@ class JsonToClassConverter {
 
     public function createYogaClassFromJson($jsonData): YogaClass{
         $yogaClass = new YogaClass($jsonData['className']);
+        if(isset($jsonData['id'])){
+            $yogaClass->setId($jsonData['id']);
+        }
         if(isset($jsonData['publicShared'])){
             $yogaClass->setPublicShared($jsonData['publicShared']);
         }
@@ -19,7 +22,7 @@ class JsonToClassConverter {
         if(isset($jsonData['yogaTeacherName']) && isset($jsonData['yogaTeacherEmailId'])) {
 
             $yogaClass->setYogaTeacherName($jsonData['yogaTeacherName']);
-            $yogaClass->setYogaTeacherName($jsonData['yogaTeacherEmailId']);
+            $yogaClass->setYogaTeacherEmailId($jsonData['yogaTeacherEmailId']);
         }
         return  $yogaClass;
 

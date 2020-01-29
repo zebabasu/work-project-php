@@ -33,7 +33,8 @@ class YogaClassService {
     public function removeYogaClass($id){
         $this->dbGateway->removeYogaClass($id);
     }
-    public function updateYogaClass($updatedYogaClass){
+    public function updateYogaClass($updatedYogaClassData){
+        $updatedYogaClass = $this->jsonConverter->createYogaClassFromJson($updatedYogaClassData);
         $this->dbGateway->updateYogaClass($updatedYogaClass);
     }
 }

@@ -31,4 +31,13 @@ class YogaClassController {
         $response->withStatus(200);
     }
 
+    public function updateYogaClass($request, $response, $args){
+
+        $yogaClassData = $request->getParsedBody();
+        $yogaClassService = new YogaClassService($this->dbGateway);
+        $status = $yogaClassService->updateYogaClass($yogaClassData);
+        $response->write($status);
+        $response->withStatus(200);
+    }
+
 }
