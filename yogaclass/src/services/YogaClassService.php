@@ -36,5 +36,6 @@ class YogaClassService {
     public function updateYogaClass($updatedYogaClassData){
         $updatedYogaClass = $this->jsonConverter->createYogaClassFromJson($updatedYogaClassData);
         $this->dbGateway->updateYogaClass($updatedYogaClass);
+        return $updatedYogaClass->getId();
     }
 }
