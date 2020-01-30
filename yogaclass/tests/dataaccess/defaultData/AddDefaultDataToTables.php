@@ -95,7 +95,7 @@ class AddDefaultDataToTables extends TestCase {
 
     public function testAddYogaPose() {
         /*********************************/
-        //$this->markTestSkipped('skip test testAddYogaPoseCategory');
+        $this->markTestSkipped('skip test testAddYogaPoseCategory');
         /*********************************/
        // $yogaPose1 = new YogaPose("salambasirsasan.PNG", "Salamba Sirsasan/Supported Headstand", "Strengthens your arms and shoulders", array("inversion"));
        //$yogaPose2 = new YogaPose("sarvangasan.PNG", "Sarvangasan/Shoulderstand", "Stretches the shoulders and neck", array("inversion"));

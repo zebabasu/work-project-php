@@ -13,23 +13,17 @@ class YogaPoseCategoryTest extends TestCase {
     public function testCreateObject() {
 
         $jsonString = $this::createJson();
-        //echo($jsonString . "\n");
         $this::writeJsonToFile($jsonString);
-        // Get the contents of the JSON file
         $jsonPath = realpath(__DIR__ . '/json/YogaPoseCategory.json');
         $strJsonFileContents = file_get_contents($jsonPath);
-        //echo($strJsonFileContents . "\n");
         $listYogaPoseCategory = YogaPoseCategory::createArrayFromJson($strJsonFileContents);
-        /*foreach ($listYogaPoseCategory as $category) {
-            echo $category[poseCategoryName] . "\n";
-        }*/
         $this->assertSame(5, count($listYogaPoseCategory));
         $this->assertSame('standing',$listYogaPoseCategory[0]['poseCategoryName'] );
     }
     /**
      * @return ArrayObject
      */
-    public static function createYogaPoseCategoryArray(): ArrayObject {
+    public static function createMockYogaPoseCategoryArray(): ArrayObject {
         $listYogaPoseCategory = new ArrayObject();
 
         $listYogaPoseCategory->append(new YogaPoseCategory('standing', time()));
@@ -41,7 +35,7 @@ class YogaPoseCategoryTest extends TestCase {
     }
 
     private static function createJson(){
-        $listYogaPoseCategory = self::createYogaPoseCategoryArray();
+        $listYogaPoseCategory = self::createMockYogaPoseCategoryArray();
 
         $jsonString =  json_encode($listYogaPoseCategory, JSON_PRETTY_PRINT);
         return $jsonString;
